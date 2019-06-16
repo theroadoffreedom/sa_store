@@ -38,3 +38,13 @@ func InsertTLrbByYear(model *models.TLrbByYear) (uint,error) {
 	}
 	return uint(effect_row),nil
 }
+
+func CountTLrbByYear() (int64, error) {
+	db, _ := GetDB()
+	model := new(models.TLrbByYear)
+	c, err := db.Count(model)
+	if err != nil {
+		return 0, err
+	}
+	return c, nil
+}

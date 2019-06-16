@@ -59,3 +59,13 @@ func CheckTXjllbByQuarter(date int64, id string) (bool, error) {
 		return false, nil
 	}
 }
+
+func CountTXjllbByQuarter() (int64, error) {
+	db, _ := GetDB()
+	model := new(models.TXjllbByQuarter)
+	c, err := db.Count(model)
+	if err != nil {
+		return 0, err
+	}
+	return c, nil
+}

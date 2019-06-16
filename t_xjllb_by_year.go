@@ -38,3 +38,13 @@ func InsertTXjllbByYear(model *models.TXjllbByYear) (uint,error) {
 	}
 	return uint(effect_row),nil
 }
+
+func CountTXjllbByYear() (int64, error) {
+	db, _ := GetDB()
+	model := new(models.TXjllbByYear)
+	c, err := db.Count(model)
+	if err != nil {
+		return 0, err
+	}
+	return c, nil
+}

@@ -37,3 +37,14 @@ func InsertTZcfzbByYear(model *models.TZcfzbByYear) (uint,error) {
 	}
 	return uint(effect_row),nil
 }
+
+
+func CountTZcfzbByYear() (int64, error) {
+	db, _ := GetDB()
+	model := new(models.TZcfzbByYear)
+	c, err := db.Count(model)
+	if err != nil {
+		return 0, err
+	}
+	return c, nil
+}
