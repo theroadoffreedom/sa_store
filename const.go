@@ -5,7 +5,7 @@ const (
 	_ FinanceReportType = iota
 	BalanceSheet 			// 资产负债表    
 	CashFlowStatement		// 现金流表
-	IncomeStaement 			// 利润表
+	IncomeStatement 			// 利润表
 )
 
 type FinanceTimeType int

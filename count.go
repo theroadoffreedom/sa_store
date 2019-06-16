@@ -14,7 +14,7 @@ func CountTable(t FinanceReportType, time FinanceTimeType) (int64, error) {
 		}
 	}
 
-	if t == IncomeStaement {
+	if t == IncomeStatement {
 		if time == Quarter {
 			return CountTLrbByQuarter()
 		} else {
