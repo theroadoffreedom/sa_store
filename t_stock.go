@@ -3,6 +3,7 @@ package store
 import (
 	"errors"
 
+
 	models "github.com/theroadoffreedom/sa_xorm_model"
 )
 
@@ -28,7 +29,8 @@ func FuzzyQueryTStock(keyword string) ([]models.TStock, error) {
 	}
 
 	db, _ := GetDB()
-	err := db.AllCols().Where("id LIKE '%?%' or cn LIKE '%?%' or full_name LIKE '%?%' ", keyword,keyword,keyword).Find(&data)
+	sql := "select * from t_stock where id like '%" + keyword + "%' or cn like '%" + keyword + "%' or full_name like '%" + keyword + "%'" 
+	err := db.SQL(sql).Find(&data)
 	if err != nil {
 		return nil, err
 	}
