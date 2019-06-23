@@ -20,6 +20,23 @@ func QueryTStock() ([]models.TStock, error) {
 	return data, nil
 }
 
+
+func FuzzyQueryTStock(keyword string) ([]models.TStock, error) {
+	data := make([]models.TStock, 0)
+	if len(keyword)== 0 {
+		return data,nil	
+	}
+
+	db, _ := GetDB()
+	err := db.AllCols().Where("id LIKE '%?%' or cn LIKE '%?%' or full_name LIKE '%?%' ", keyword,keyword,keyword).Find(&data)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
+
+
 func GetAStockCount() (int64, error) {
 	db, _ := GetDB()
 
