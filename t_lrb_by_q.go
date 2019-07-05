@@ -71,3 +71,13 @@ func CheckTLrbByQuarter(date int64, id string) (bool, error) {
 		return false, nil
 	}
 }
+
+func CountTLrbByQuarter() (int64, error) {
+	db, _ := GetDB()
+	model := new(models.TLrbByQuarter)
+	c, err := db.Count(model)
+	if err != nil {
+		return 0, err
+	}
+	return c, nil
+}

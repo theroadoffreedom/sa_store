@@ -58,3 +58,13 @@ func CheckTZcfzbByQuarter(date int64, id string) (bool, error) {
 		return false, nil
 	}
 }
+
+func CountTZcfzbByQuarter() (int64, error) {
+	db, _ := GetDB()
+	model := new(models.TZcfzbByQuarter)
+	c, err := db.Count(model)
+	if err != nil {
+		return 0, err
+	}
+	return c, nil
+}

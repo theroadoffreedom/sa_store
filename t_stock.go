@@ -3,6 +3,7 @@ package store
 import (
 	"errors"
 
+
 	models "github.com/theroadoffreedom/sa_xorm_model"
 )
 
@@ -19,6 +20,24 @@ func QueryTStock() ([]models.TStock, error) {
 	}
 	return data, nil
 }
+
+
+func FuzzyQueryTStock(keyword string) ([]models.TStock, error) {
+	data := make([]models.TStock, 0)
+	if len(keyword)== 0 {
+		return data,nil	
+	}
+
+	db, _ := GetDB()
+	sql := "select * from t_stock where id like '%" + keyword + "%' or cn like '%" + keyword + "%' or full_name like '%" + keyword + "%'" 
+	err := db.SQL(sql).Find(&data)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
+
 
 func GetAStockCount() (int64, error) {
 	db, _ := GetDB()
