@@ -9,6 +9,17 @@ import (
 	utils "github.com/theroadoffreedom/utils"
 )
 
+func QueryTZcfzbQByStockId(id string) ([]models.TZcfzbByQuarter, error) {
+	db, _ := GetDB()
+	data := make([]models.TZcfzbByQuarter, 0)
+	err := db.Where("id = ?", id).Find(&data)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
+
 func QueryTZcfzbByQLastestCount(id string) (int64, error) {
 	db, _ := GetDB()
 	model := new(models.TZcfzbByQuarter)

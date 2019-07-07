@@ -4,6 +4,16 @@ import (
 	models "github.com/theroadoffreedom/sa_xorm_model"
 )
 
+func QueryTZcfzbYByStockId(id string) ([]models.TZcfzbByYear, error) {
+	db, _ := GetDB()
+	data := make([]models.TZcfzbByYear, 0)
+	err := db.Where("id = ?", id).Find(&data)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
 func QueryTZcfzbByYearLastest(id string) (*models.TZcfzbByYear, error) {
 	db, _ := GetDB()
 	model := new(models.TZcfzbByYear)

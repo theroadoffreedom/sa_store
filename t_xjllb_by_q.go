@@ -9,6 +9,17 @@ import (
 	utils "github.com/theroadoffreedom/utils"
 )
 
+func QueryTXjllbQByStockId(id string) ([]models.TXjllbByQuarter, error) {
+	db, _ := GetDB()
+	data := make([]models.TXjllbByQuarter, 0)
+	err := db.Where("id = ?", id).Find(&data)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
+
 func QueryTXjllbByQLastestCount(id string) (int64, error) {
 	db, _ := GetDB()
 	model := new(models.TXjllbByQuarter)
