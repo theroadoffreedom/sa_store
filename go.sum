@@ -51,6 +51,8 @@ github.com/stretchr/testify v1.2.2 h1:bSDNvY7ZPG5RlJ8otE/7V6gMiyenm9RtJ7IUVIAoJ1
 github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
 github.com/theroadoffreedom/sa_xorm_model v0.0.1 h1:sE6vE4dO8jYdUX4z55KSadbSxGT2s4dMZ2NTJp4Iq50=
 github.com/theroadoffreedom/sa_xorm_model v0.0.1/go.mod h1:lJpLh+yrNcV2oBbnveAu11+79SPsHflie1T0yffwVg0=
+github.com/theroadoffreedom/sa_xorm_model v0.0.2 h1:DI512QtKMkh1ziWV260iEVQ+SZy+/UigU73jTx8blf4=
+github.com/theroadoffreedom/sa_xorm_model v0.0.2/go.mod h1:F8saQaXgZWFVqSqTU+YUoXtVdD3p0Jj7IY8NzP6r2I0=
 github.com/theroadoffreedom/utils v0.0.1 h1:o343BRQGjVu6uasT5NJxbPXzH5t0OSp/DjcD8+/MVKU=
 github.com/theroadoffreedom/utils v0.0.1/go.mod h1:x2+dEYiQqmRLC0k3wc+8hP97TFhp88V5uRcY9lUCKOM=
 github.com/ziutek/mymysql v1.5.4 h1:GB0qdRGsTwQSBVYuVShFBKaXSnSnYYC2d9knnE1LHFs=

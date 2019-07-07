@@ -1,16 +1,72 @@
 package store
 
+import (
+	"errors"
+	models "github.com/theroadoffreedom/sa_xorm_model"
+)
+
 type FinanceReportType int
 const (
-	_ FinanceReportType = iota
+	AllSheet FinanceReportType = iota
 	BalanceSheet 			// 资产负债表    
-	CashFlowStatement		// 现金流表
-	IncomeStatement 			// 利润表
+	CashStatement		// 现金流表
+	ProfitStatement 			// 利润表
 )
 
 type FinanceTimeType int
 const (
-	_ FinanceTimeType = iota
+	AllTime FinanceTimeType = iota
 	Quarter			// 季度 
 	Yearly			// 年度
 )
+
+type ReportState int
+const (
+	AllReportState ReportState = iota
+	ReportNormal
+	ReportInvalid
+	ReportFailed
+)
+
+func checkReportType(reportType int) error {
+	_type := FinanceReportType(reportType)
+	if _type == BalanceSheet || _type == CashStatement || _type == ProfitStatement {
+		return nil
+	}
+	return errors.New(STORE_REPORT_TYPE_ERROR)
+}
+
+func checkReportTimeType(reportTimeType int) error {
+	_type := FinanceTimeType(reportTimeType)
+	if _type == Quarter || _type == Yearly {
+		return nil
+	}
+	return errors.New(STORE_REPORT_TIME_TYPE_ERROR)
+}
+
+func checkReportState(state int) error {
+	_state := ReportState(state)
+	if _state == ReportNormal || _state == ReportInvalid || _state == ReportFailed {
+		return nil
+	}
+	return errors.New(STORE_REPORT_STATE_ERROR)
+}
+
+
+func checkIndex(obj *models.TAutoFinanceReportIndex) error {
+	// check report type
+	err := checkReportType(obj.ReportType)
+	if err != nil {
+		return err
+	}
+	err = checkReportTimeType(obj.ReportTimeType)
+	if err != nil {
+		return err
+	}
+	err = checkReportState(obj.State)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
