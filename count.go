@@ -8,13 +8,13 @@ func CountTable(t FinanceReportType, time FinanceTimeType) (int64, error) {
 
 	if t == BalanceSheet {
 		if time == Quarter {
-			return CountTZcfzbByQuarter()	
+			return CountTZcfzbByQuarter()
 		} else {
 			return CountTZcfzbByYear()
 		}
 	}
 
-	if t == IncomeStatement {
+	if t == ProfitStatement {
 		if time == Quarter {
 			return CountTLrbByQuarter()
 		} else {
@@ -22,7 +22,7 @@ func CountTable(t FinanceReportType, time FinanceTimeType) (int64, error) {
 		}
 	}
 
-	if t == CashFlowStatement {
+	if t == CashStatement {
 		if time == Quarter {
 			return CountTXjllbByQuarter()
 		} else {
@@ -30,5 +30,5 @@ func CountTable(t FinanceReportType, time FinanceTimeType) (int64, error) {
 		}
 	}
 
-	return -1, errors.New("unsupport type,time") 
+	return -1, errors.New("unsupport type,time")
 }

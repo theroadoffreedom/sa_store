@@ -6,21 +6,24 @@ import (
 )
 
 type FinanceReportType int
+
 const (
-	AllSheet FinanceReportType = iota
-	BalanceSheet 			// 资产负债表    
-	CashStatement		// 现金流表
-	ProfitStatement 			// 利润表
+	AllSheet        FinanceReportType = iota
+	BalanceSheet                      // 资产负债表
+	CashStatement                     // 现金流表
+	ProfitStatement                   // 利润表
 )
 
 type FinanceTimeType int
+
 const (
 	AllTime FinanceTimeType = iota
-	Quarter			// 季度 
-	Yearly			// 年度
+	Quarter                 // 季度
+	Yearly                  // 年度
 )
 
 type ReportState int
+
 const (
 	AllReportState ReportState = iota
 	ReportNormal
@@ -51,7 +54,6 @@ func checkReportState(state int) error {
 	}
 	return errors.New(STORE_REPORT_STATE_ERROR)
 }
-
 
 func checkIndex(obj *models.TAutoFinanceReportIndex) error {
 	// check report type
