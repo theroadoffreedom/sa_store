@@ -27,8 +27,6 @@ func NewReportIndex(
 		return inx
 }
 
-
-
 // get
 func QueryReportIndex(
 	id string, reportType FinanceReportType, 
@@ -39,16 +37,18 @@ func QueryReportIndex(
 		if limit == 0 {
 			return nil, errors.New(STORE_LIMIT_IS_ZERO_ERROR)
 		}
-		if len(id) == 0 {
-			return nil,errors.New(STORE_ID_EMPTY_ERROR)
-		}
 
 		indexs := make([]models.TAutoFinanceReportIndex,0)
 		db, _ := GetDB()
 
 		if reportTimeType == AllTime && reportType == AllSheet {
-			err := db.Where("id = ?",id).Limit(int(limit), int(offset)).Find(&indexs)
-			return indexs, err
+			if len(id) != 0 {
+				err := db.Where("id = ?",id).Limit(int(limit), int(offset)).Find(&indexs)
+				return indexs, err
+			} else {
+				err := db.Limit(int(limit), int(offset)).Find(&indexs)
+				return indexs, err
+			}
 		}
 
 		if reportTimeType != AllTime && reportType == AllSheet {
@@ -61,11 +61,13 @@ func QueryReportIndex(
 			return indexs, err
 		}
 
-		db.ShowSQL(true)
-		err := db.Where("id = ? AND report_type = ? AND report_time_type = ?",
-		id,int(reportType),int(reportTimeType)).Limit(int(limit), int(offset)).Find(&indexs)
-
-		return indexs,err
+		if len(id) != 0 {
+			err := db.Where("id = ? AND report_type = ? AND report_time_type = ?",id,int(reportType),int(reportTimeType)).Limit(int(limit), int(offset)).Find(&indexs)
+			return indexs,err
+		} else {
+			err := db.Where("report_type = ? AND report_time_type = ?",int(reportType),int(reportTimeType)).Limit(int(limit), int(offset)).Find(&indexs)
+			return indexs,err
+		}
 }
 
 

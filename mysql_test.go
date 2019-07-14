@@ -67,6 +67,7 @@ func TestQueryYByStockId(t *testing.T) {
 
 func TestInsertReportIndexWhenNotExist(t *testing.T) {
 
+	TEST_STOCK_ID := "000000"
 	err := InitStore(TEST_DB_IP,TEST_DB_PORT,TEST_DB_USER, TEST_DB_USER_PW, TEST_DB_NAME)
 	if err != nil {
 		t.Error(err)
@@ -130,5 +131,20 @@ func TestInsertReportIndexWhenNotExist(t *testing.T) {
 		t.Error("delete error")
 		return 
 	}
+
 }
 
+
+func TestQueryNoId(t *testing.T) {
+	// query for no id
+	indexs, err := QueryReportIndex("",BalanceSheet,Quarter,0,10)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	if len(indexs) == 0 {
+		t.Error("query error")
+		return 
+	}
+	t.Log(indexs)
+}
