@@ -124,7 +124,7 @@ func InsertReportIndexWhenNotExist(obj *models.TAutoFinanceReportIndex) (int64,e
 
 	db, _ := GetDB()
 	index := make([]models.TAutoFinanceReportIndex,0)
-	err = db.Where("id = ? AND data_time = ? AND report_type = ?", obj.Id,obj.DataTime, obj.ReportType).Find(&index)
+	err = db.Where("id = ? AND data_time = ? AND report_type = ? AND report_time_type = ?", obj.Id,obj.DataTime, obj.ReportType, obj.ReportTimeType).Find(&index)
 	if err != nil {
 		return 0,err
 	}
