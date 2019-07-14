@@ -72,3 +72,50 @@ func checkIndex(obj *models.TAutoFinanceReportIndex) error {
 
 	return nil
 }
+
+func GetReportTypeStoreType(reportType string) FinanceReportType {
+        if reportType == "balance" {
+                return BalanceSheet
+        }
+        if reportType == "cash" {
+                return CashStatement
+        }
+        if reportType == "profit" {
+                return ProfitStatement
+        }
+        return AllSheet
+}
+
+func GetReportTypeStr(reportType FinanceReportType) string {
+	if reportType == BalanceSheet {
+		return "balance"
+	}
+	if reportType == CashStatement {
+		returnd "cash"
+	}
+
+	if reportType == ProfitStatement {
+		return "profix"
+	}
+	return "all"
+}
+
+func GetTimeTypeStoreType(timeType string) FinanceTimeType {
+        if timeType == "quarter" {
+                return Quarter
+        }
+        if timeType == "year" {
+                return Yearly
+        }
+        return AllTime
+}
+
+func GetTimeTypeStr(timeType FinanceTimeType) string {
+	if timeType == Quarter {
+		return "quarter"
+	}
+	if timeType == Yearly {
+		return "year"
+	}
+	return "all"
+}

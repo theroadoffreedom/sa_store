@@ -40,6 +40,8 @@ func CountReportIndex(
 		return c, nil
 }
 
+
+// report id format : [balance|cash|profix]_[stockid]_[y|q]_[data_time]
 func NewReportIndex(
 	id string, 
 	dataTime int, 
@@ -47,7 +49,12 @@ func NewReportIndex(
 	reportType FinanceReportType, 
 	reportTimeType FinanceTimeType) *models.TAutoFinanceReportIndex {
 
+		if len(id) == 0 {
+			return nil
+		}
+
 		inx := new(models.TAutoFinanceReportIndex)
+		inx.ReportId = fmt.Sprintf("%s_%s_%s_%d", GetReportTypeStr(reportType), id, GetTimeTypeStr(reportTimeType), dataTime)
 		inx.Id = id
 		inx.DataTime = dataTime
 		inx.State = int(state)
