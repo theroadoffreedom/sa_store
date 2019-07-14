@@ -91,7 +91,7 @@ func GetReportTypeStr(reportType FinanceReportType) string {
 		return "balance"
 	}
 	if reportType == CashStatement {
-		returnd "cash"
+		return "cash"
 	}
 
 	if reportType == ProfitStatement {
