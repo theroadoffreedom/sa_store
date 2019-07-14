@@ -8,7 +8,38 @@ import (
 	utils "github.com/theroadoffreedom/utils"
 )
 
-// 
+func CountReportIndex(
+	id string,
+	dataTime int,
+	state ReportState,
+	reportType FinanceReportType,
+	reportTimeType FinanceTimeType) (int64, error) {
+
+		db, _ := GetDB()
+		model := models.TAutoFinanceReportIndex{}
+		if len(id) != 0 {
+			model.Id = id
+		}
+		if dataTime != 0 {
+			model.DataTime = dataTime
+		}
+		if state != AllReportState {
+			model.State = int(state)
+		}
+		if reportType != AllSheet {
+			model.ReportType = int(reportType)
+		}
+		if reportTimeType != AllTime {
+			model.ReportTimeType = int(reportTimeType)
+
+		}
+		c, err := db.Count(&model)
+		if err != nil {
+			return 0, err
+		}
+		return c, nil
+}
+
 func NewReportIndex(
 	id string, 
 	dataTime int, 

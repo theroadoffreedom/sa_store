@@ -136,6 +136,14 @@ func TestInsertReportIndexWhenNotExist(t *testing.T) {
 
 
 func TestQueryNoId(t *testing.T) {
+
+	err := InitStore(TEST_DB_IP,TEST_DB_PORT,TEST_DB_USER, TEST_DB_USER_PW, TEST_DB_NAME)
+	if err != nil {
+		t.Error(err)
+		return
+	} 
+
+
 	// query for no id
 	indexs, err := QueryReportIndex("",BalanceSheet,Quarter,0,10)
 	if err != nil {
@@ -147,4 +155,49 @@ func TestQueryNoId(t *testing.T) {
 		return 
 	}
 	t.Log(indexs)
+}
+
+func TestCountReportIndex(t *testing.T) {
+
+	err := InitStore(TEST_DB_IP,TEST_DB_PORT,TEST_DB_USER, TEST_DB_USER_PW, TEST_DB_NAME)
+	if err != nil {
+		t.Error(err)
+		return
+	} 
+
+	c, err := CountReportIndex("000333",0,AllReportState,AllSheet, AllTime)
+	if err != nil {
+		t.Error(err.Error())	
+		return
+	}
+	t.Log(c)
+
+	c, err = CountReportIndex("000333",0, AllReportState, BalanceSheet, AllTime)
+	if err != nil {
+		t.Error(err.Error())	
+		return
+	}
+	t.Log(c)
+
+	c, err = CountReportIndex("000333",0, AllReportState, BalanceSheet, Yearly)
+	if err != nil {
+		t.Error(err.Error())	
+		return
+	}
+	t.Log(c)
+
+
+	c, err = CountReportIndex("000333",1325260800, AllReportState, AllSheet, AllTime)
+	if err != nil {
+		t.Error(err.Error())	
+		return
+	}
+	t.Log(c)
+
+	c, err = CountReportIndex("",1325260800, AllReportState, AllSheet, AllTime)
+	if err != nil {
+		t.Error(err.Error())	
+		return
+	}
+	t.Log(c)
 }
