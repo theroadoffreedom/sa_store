@@ -30,7 +30,7 @@ func NewReportItem(cn string, unit string, itemType string) (*models.TAstockFina
 	if err != nil {
 		return nil, err
 	}
-	item.Id = fmt.Sprintf("%s_item_%c", itemType, c)
+	item.Id = fmt.Sprintf("%s_item_%d", itemType, c)
 	return item, nil
 }
 
