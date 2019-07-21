@@ -59,3 +59,9 @@ func CountTXjllbByYear() (int64, error) {
 	}
 	return c, nil
 }
+
+
+func UpdateTXjllbByYear(model *models.TXjllbByYear) (int64, error) {
+	db, _ := GetDB()
+	return db.Where("id = ?", model.Id).And("data_time = ?",model.DataTime).Update(model)
+}

@@ -110,6 +110,8 @@ github.com/theroadoffreedom/sa_xorm_model v0.0.2 h1:DI512QtKMkh1ziWV260iEVQ+SZy+
 github.com/theroadoffreedom/sa_xorm_model v0.0.2/go.mod h1:F8saQaXgZWFVqSqTU+YUoXtVdD3p0Jj7IY8NzP6r2I0=
 github.com/theroadoffreedom/sa_xorm_model v0.0.4 h1:pskj8KkQfgBSMnJeEJvdhkdDd2QHDvBDG+BWOB93tuI=
 github.com/theroadoffreedom/sa_xorm_model v0.0.4/go.mod h1:F8saQaXgZWFVqSqTU+YUoXtVdD3p0Jj7IY8NzP6r2I0=
+github.com/theroadoffreedom/sa_xorm_model v0.0.5 h1:hyfRbAUTk5ypkAZGI+ao686r6Lh97bA5eRkP0Ku6xlk=
+github.com/theroadoffreedom/sa_xorm_model v0.0.5/go.mod h1:F8saQaXgZWFVqSqTU+YUoXtVdD3p0Jj7IY8NzP6r2I0=
 github.com/theroadoffreedom/utils v0.0.1 h1:o343BRQGjVu6uasT5NJxbPXzH5t0OSp/DjcD8+/MVKU=
 github.com/theroadoffreedom/utils v0.0.1/go.mod h1:x2+dEYiQqmRLC0k3wc+8hP97TFhp88V5uRcY9lUCKOM=
 github.com/ziutek/mymysql v1.5.4 h1:GB0qdRGsTwQSBVYuVShFBKaXSnSnYYC2d9knnE1LHFs=

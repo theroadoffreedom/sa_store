@@ -2,6 +2,7 @@ package store
 
 import (
 	"testing"
+	"fmt"
 
 	utils "github.com/theroadoffreedom/utils"
 )
@@ -200,4 +201,39 @@ func TestCountReportIndex(t *testing.T) {
 		return
 	}
 	t.Log(c)
+}
+
+func TestUpdateReportId(t *testing.T) {
+
+	err := InitStore(TEST_DB_IP,TEST_DB_PORT,TEST_DB_USER, TEST_DB_USER_PW, TEST_DB_NAME)
+	if err != nil {
+		t.Error(err)
+		return
+	} 
+
+	data,err := QueryTZcfzbQByStockId(TEST_STOCK_ID)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if len(data) == 0 {
+		t.Error("data is empty")
+	}
+
+	t.Log(len(data))
+	report := data[0]
+	report.ReportId = fmt.Sprintf("profit_q_%s_%s_%s_%s",report.Id, utils.GetYearFromTimestamp(int64(report.DataTime)), utils.GetMonthFromTimestamp(int64(report.DataTime)), utils.GetDayFromTimestamp(int64(report.DataTime)))
+
+	eff, err := UpdateTZcfzbByQuarter(&report)
+	if err != nil {
+		t.Error(err.Error())
+		return
+	}
+	if eff == 0 {
+		t.Error("update failed")
+		return
+	}
+	t.Log("test success")
+	return
 }

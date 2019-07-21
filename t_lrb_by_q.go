@@ -79,3 +79,9 @@ func CountTLrbByQuarter() (int64, error) {
 	}
 	return c, nil
 }
+
+
+func UpdateTLrbByQuarter(model *models.TLrbByQuarter) (int64, error) {
+	db, _ := GetDB()
+	return db.Where("id = ?", model.Id).And("data_time = ?",model.DataTime).Update(model)
+}

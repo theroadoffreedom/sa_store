@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"time"
 
+//	core "xorm.io/core"
 	models "github.com/theroadoffreedom/sa_xorm_model"
 	utils "github.com/theroadoffreedom/utils"
 )
@@ -78,4 +79,9 @@ func CountTZcfzbByQuarter() (int64, error) {
 		return 0, err
 	}
 	return c, nil
+}
+
+func UpdateTZcfzbByQuarter(model *models.TZcfzbByQuarter) (int64, error) {
+	db, _ := GetDB()
+	return db.Where("id = ?", model.Id).And("data_time = ?",model.DataTime).Update(model)
 }

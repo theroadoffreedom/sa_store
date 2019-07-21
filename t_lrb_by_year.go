@@ -60,3 +60,9 @@ func CountTLrbByYear() (int64, error) {
 	}
 	return c, nil
 }
+
+
+func UpdateTLrbByYear(model *models.TLrbByYear) (int64, error) {
+	db, _ := GetDB()
+	return db.Where("id = ?", model.Id).And("data_time = ?",model.DataTime).Update(model)
+}

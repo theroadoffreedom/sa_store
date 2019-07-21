@@ -16,3 +16,8 @@ import (
 
 err := store.InitStore(ip,port,username,password,dbname)
 ```
+
+# test
+```
+go test -v -test.run TestUpdateReportId
+```
