@@ -57,7 +57,7 @@ func QueryReportItem(id string, cn string, itemType string, offset uint64, limit
 
 	// just use id
 	if len(id) != 0 {
-		err := db.Id(id).Find(&items)
+		err := db.Where("id = ?", id).Find(&items)
 		if err != nil {
 			return nil, err
 		}
