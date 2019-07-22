@@ -35,10 +35,7 @@ func NewReportItem(cn string, unit string, itemType string) (*models.TAstockFina
 }
 
 
-func FuzzyQueryReportItem(
-	keyword string,
-	offset uint64, 
-	limit uint64) ([]models.TAstockFinanceReportItemDefinition, error) {
+func FuzzyQueryReportItem(keyword string) ([]models.TAstockFinanceReportItemDefinition, error) {
 
 	data := make([]models.TAstockFinanceReportItemDefinition, 0)
 	if len(keyword)== 0 {
@@ -47,7 +44,7 @@ func FuzzyQueryReportItem(
 
 	db, _ := GetDB()
 	sql := "select * from t_astock_finance_report_item_definition where cn like '%" + keyword + "%'" 
-	err := db.SQL(sql).Limit(int(limit), int(offset)).Find(&data)
+	err := db.SQL(sql).Find(&data)
 	if err != nil {
 		return nil, err
 	}
