@@ -60,3 +60,13 @@ func InsertOperatorRunStatisIfNotExistAndUpdateCheckTime(stock_id string, operat
 	}
 	return true,nil
 }
+
+func UpdateOperatorRunState(state string, stock_id string, operator_id string) (int64,error) {
+	db, _ := GetDB()
+	obj := &models.TAstockOperatorRunStatis{
+		StockId:stock_id,
+		OperatorId:operator_id,
+		CheckTime:int(utils.GetCurrentTimestamp()),
+		ShouldRun:state}
+	return db.Update(obj)
+}
