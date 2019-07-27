@@ -122,9 +122,19 @@ func GetTimeTypeStr(timeType FinanceTimeType) string {
 	return "all"
 }
 
+func GetTimeTypeReportStr(timeType FinanceTimeType) string {
+	if timeType == Quarter {
+		return "q"
+	}
+	if timeType == Yearly {
+		return "y"
+	}
+	return "a"
+}
+
 func GetReportTypeFromId(id string) (string, error) {
 	if len(id) == 0 {
-		return errors.New("report id error")
+		return "",errors.New("report id error")
 	}
 
 	strs := strings.Split(id,"_")
@@ -140,7 +150,7 @@ func GetReportTypeFromId(id string) (string, error) {
 
 func GetReportTimeTypeFromId(id string) (string, error) {
 	if len(id) == 0 {
-		return errors.New("report id error")
+		return "",errors.New("report id error")
 	}
 
 	strs := strings.Split(id,"_")
