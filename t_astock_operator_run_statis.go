@@ -51,7 +51,7 @@ func InsertOperatorRunStatisIfNotExistAndUpdateCheckTime(stock_id string, operat
 	// step4: if should run , update check time
 	items[0].CheckTime = int(utils.GetCurrentTimestamp())
 	fmt.Println(items[0].CheckTime)
-	eff, err := db.Update(&items[0])
+	eff, err := db.Cols("check_time").Update(&items[0])
 	if err != nil {
 		return false, err
 	}
@@ -68,5 +68,5 @@ func UpdateOperatorRunState(state string, stock_id string, operator_id string) (
 		OperatorId:operator_id,
 		CheckTime:int(utils.GetCurrentTimestamp()),
 		ShouldRun:state}
-	return db.Update(obj)
+	return db.Cols("should_run").Update(obj)
 }
