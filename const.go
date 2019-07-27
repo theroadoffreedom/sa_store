@@ -2,6 +2,8 @@ package store
 
 import (
 	"errors"
+	"strings"
+
 	models "github.com/theroadoffreedom/sa_xorm_model"
 )
 
@@ -118,4 +120,39 @@ func GetTimeTypeStr(timeType FinanceTimeType) string {
 		return "year"
 	}
 	return "all"
+}
+
+func GetReportTypeFromId(id string) (string, error) {
+	if len(id) == 0 {
+		return errors.New("report id error")
+	}
+
+	strs := strings.Split(id,"_")
+	switch strs[0] {
+		case "cash","balance","profit":{
+			return strs[0],nil
+		}
+		default:{
+			return "",errors.New("report id is error, parse error")
+		}
+	}
+}
+
+func GetReportTimeTypeFromId(id string) (string, error) {
+	if len(id) == 0 {
+		return errors.New("report id error")
+	}
+
+	strs := strings.Split(id,"_")
+	switch strs[0] {
+		case "y":{
+			return "year",nil
+		}
+		case "q":{
+			return "querter",nil
+		}
+		default:{
+			return "",errors.New("report id is error, parse error")
+		}
+	}
 }
