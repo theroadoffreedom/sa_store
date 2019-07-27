@@ -2,7 +2,6 @@ package store
 
 import (
 
-	"fmt"
 	"errors"
 
 	models "github.com/theroadoffreedom/sa_xorm_model"
@@ -50,13 +49,9 @@ func InsertOperatorRunStatisIfNotExistAndUpdateCheckTime(stock_id string, operat
 
 	// step4: if should run , update check time
 	items[0].CheckTime = int(utils.GetCurrentTimestamp())
-	fmt.Println(items[0].CheckTime)
-	eff, err := db.Cols("check_time").Update(&items[0])
+	_,err = db.Cols("check_time").Update(&items[0])
 	if err != nil {
 		return false, err
-	}
-	if eff == 0 {
-		return false, errors.New("update check time error")
 	}
 	return true,nil
 }
