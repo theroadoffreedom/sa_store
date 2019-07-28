@@ -21,4 +21,5 @@ err := store.InitStore(ip,port,username,password,dbname)
 ```
 go test -v -test.run TestUpdateReportId
 go test -count=1 -v t_astock_operator_run_statis_test.go t_astock_operator_run_statis.go  mysql.go
+go test -count=1 -v t_astock_k_line_manage_test.go t_astock_k_line_manage.go mysql.go
 ```
