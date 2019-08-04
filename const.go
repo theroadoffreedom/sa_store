@@ -158,6 +158,29 @@ func GetPlateStr(plate int) string {
 	}
 }
 
+func GetPlateFromStr(s string) int {
+	switch s {
+		case "unknow":{
+			return 0
+		}
+		case "sh":{
+			return 1
+		}
+		case "sz":{
+			return 2
+		}
+		case "hk":{
+			return 3
+		}
+		case "us":{
+			return 4
+		}
+		default : {
+			return -1
+		}
+	}
+}
+
 func GetTimeTypeReportStr(timeType FinanceTimeType) string {
 	if timeType == Quarter {
 		return "q"
