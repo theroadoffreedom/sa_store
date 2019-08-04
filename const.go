@@ -3,8 +3,21 @@ package store
 import (
 	"errors"
 	"strings"
+	"regexp"
 
 	models "github.com/theroadoffreedom/sa_xorm_model"
+)
+
+
+type StockPlate int
+const (
+	UnknowPlate StockPlate = iota
+	SZ
+	SH
+	HK
+	US
+	JP
+	UK
 )
 
 type FinanceReportType int
@@ -122,6 +135,29 @@ func GetTimeTypeStr(timeType FinanceTimeType) string {
 	return "all"
 }
 
+func GetPlateStr(plate int) string {
+	switch plate {
+		case 0:{
+			return "unknow"
+		}
+		case 1:{
+			return "sh"
+		}
+		case 2:{
+			return "sz"
+		}
+		case 3:{
+			return "hk"
+		}
+		case 4:{
+			return "us"
+		}
+		default:{
+			return "unknow"
+		}
+	}
+}
+
 func GetTimeTypeReportStr(timeType FinanceTimeType) string {
 	if timeType == Quarter {
 		return "q"
@@ -166,3 +202,47 @@ func GetReportTimeTypeFromId(id string) (string, error) {
 		}
 	}
 }
+
+
+func GetExchangeLabel(stock_id string) (string, error) {
+	// macth 60****
+	match,_ := regexp.MatchString("60[0-9][0-9][0-9][0-9]",stock_id)
+	if match {
+		return "sh", nil
+	}
+
+	// match 000***
+	match,_ = regexp.MatchString("000[0-9][0-9][0-9]",stock_id)
+	if match {
+		return "sz",nil
+	}
+
+	// match 001***
+	match,_ = regexp.MatchString("001[0-9][0-9][0-9]",stock_id)
+	if match {
+		return "sz",nil
+	}
+
+	// match 002***
+	match,_ = regexp.MatchString("002[0-9][0-9][0-9]",stock_id)
+	if match {
+		return "sz",nil
+	}
+
+	// match 30***
+	match,_ = regexp.MatchString("30[0-9[0-9][0-9][0-9]",stock_id)
+	if match {
+		return "sz",nil
+	}
+
+	// match 688**
+	match,_ = regexp.MatchString("688[0-9][0-9][0-9]",stock_id)
+	if match {
+		return "sh",nil
+	}
+
+	return "", errors.New("stock id error")
+}
+
+
+
