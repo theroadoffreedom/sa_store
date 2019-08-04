@@ -78,3 +78,17 @@ func UpdateTStock(model *models.TStock) (int64, error) {
 	db, _ := GetDB()
 	return db.Id(model.Id).Update(model)
 }
+
+func GetStockInfoOrderByInfoCheckTime() (*models.TStock, error) {
+	db, _ := GetDB()
+	stock := new(models.TStock)
+	has, err := db.Asc("info_check_time").Get(stock)
+	if err != nil {
+		return nil, err
+	}
+	if has {
+		return stock, nil
+	} else {
+		return nil, errors.New(STORE_ERR_CODE_CHECK_TIME_FOUND_EMPTY)
+	}
+}
