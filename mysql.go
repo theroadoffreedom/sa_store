@@ -77,9 +77,9 @@ func GetDB() (*xorm.Engine, error) {
 }
 
 func InitStore(ip string, port int, user string, password string, dbname string) error {
-	instance,err := GetInstance()
+	instance, err := GetInstance()
 	if err != nil {
 		return err
 	}
-	return instance.Init(ip,port,user,password,dbname)
+	return instance.Init(ip, port, user, password, dbname)
 }

@@ -2,14 +2,14 @@ package store
 
 import (
 	"errors"
-	"strings"
 	"regexp"
+	"strings"
 
 	models "github.com/theroadoffreedom/sa_xorm_model"
 )
 
-
 type StockPlate int
+
 const (
 	UnknowPlate StockPlate = iota
 	SZ
@@ -89,16 +89,16 @@ func checkIndex(obj *models.TAutoFinanceReportIndex) error {
 }
 
 func GetReportTypeStoreType(reportType string) FinanceReportType {
-        if reportType == "balance" {
-                return BalanceSheet
-        }
-        if reportType == "cash" {
-                return CashStatement
-        }
-        if reportType == "profit" {
-                return ProfitStatement
-        }
-        return AllSheet
+	if reportType == "balance" {
+		return BalanceSheet
+	}
+	if reportType == "cash" {
+		return CashStatement
+	}
+	if reportType == "profit" {
+		return ProfitStatement
+	}
+	return AllSheet
 }
 
 func GetReportTypeStr(reportType FinanceReportType) string {
@@ -116,13 +116,13 @@ func GetReportTypeStr(reportType FinanceReportType) string {
 }
 
 func GetTimeTypeStoreType(timeType string) FinanceTimeType {
-        if timeType == "quarter" {
-                return Quarter
-        }
-        if timeType == "year" {
-                return Yearly
-        }
-        return AllTime
+	if timeType == "quarter" {
+		return Quarter
+	}
+	if timeType == "year" {
+		return Yearly
+	}
+	return AllTime
 }
 
 func GetTimeTypeStr(timeType FinanceTimeType) string {
@@ -137,22 +137,28 @@ func GetTimeTypeStr(timeType FinanceTimeType) string {
 
 func GetPlateStr(plate int) string {
 	switch plate {
-		case 0:{
+	case 0:
+		{
 			return "unknow"
 		}
-		case 1:{
+	case 1:
+		{
 			return "sh"
 		}
-		case 2:{
+	case 2:
+		{
 			return "sz"
 		}
-		case 3:{
+	case 3:
+		{
 			return "hk"
 		}
-		case 4:{
+	case 4:
+		{
 			return "us"
 		}
-		default:{
+	default:
+		{
 			return "unknow"
 		}
 	}
@@ -160,22 +166,28 @@ func GetPlateStr(plate int) string {
 
 func GetPlateFromStr(s string) int {
 	switch s {
-		case "unknow":{
+	case "unknow":
+		{
 			return 0
 		}
-		case "sh":{
+	case "sh":
+		{
 			return 1
 		}
-		case "sz":{
+	case "sz":
+		{
 			return 2
 		}
-		case "hk":{
+	case "hk":
+		{
 			return 3
 		}
-		case "us":{
+	case "us":
+		{
 			return 4
 		}
-		default : {
+	default:
+		{
 			return -1
 		}
 	}
@@ -193,79 +205,85 @@ func GetTimeTypeReportStr(timeType FinanceTimeType) string {
 
 func GetReportTypeFromId(id string) (string, error) {
 	if len(id) == 0 {
-		return "",errors.New("report id error")
+		return "", errors.New("report id error")
 	}
 
-	strs := strings.Split(id,"_")
+	strs := strings.Split(id, "_")
 	switch strs[0] {
-		case "cash","balance","profit":{
-			return strs[0],nil
+	case "cash", "balance", "profit":
+		{
+			return strs[0], nil
 		}
-		default:{
-			return "",errors.New("report id is error, parse error")
+	default:
+		{
+			return "", errors.New("report id is error, parse error")
 		}
 	}
 }
 
 func GetReportTimeTypeFromId(id string) (string, error) {
 	if len(id) == 0 {
-		return "",errors.New("report id error")
+		return "", errors.New("report id error")
 	}
 
-	strs := strings.Split(id,"_")
+	strs := strings.Split(id, "_")
 	switch strs[0] {
-		case "y":{
-			return "year",nil
+	case "y":
+		{
+			return "year", nil
 		}
-		case "q":{
-			return "querter",nil
+	case "q":
+		{
+			return "querter", nil
 		}
-		default:{
-			return "",errors.New("report id is error, parse error")
+	default:
+		{
+			return "", errors.New("report id is error, parse error")
 		}
 	}
 }
 
-
 func GetExchangeLabel(stock_id string) (string, error) {
 	// macth 60****
-	match,_ := regexp.MatchString("60[0-9][0-9][0-9][0-9]",stock_id)
+	match, _ := regexp.MatchString("60[0-9][0-9][0-9][0-9]", stock_id)
 	if match {
 		return "sh", nil
 	}
 
 	// match 000***
-	match,_ = regexp.MatchString("000[0-9][0-9][0-9]",stock_id)
+	match, _ = regexp.MatchString("000[0-9][0-9][0-9]", stock_id)
 	if match {
-		return "sz",nil
+		return "sz", nil
 	}
 
 	// match 001***
-	match,_ = regexp.MatchString("001[0-9][0-9][0-9]",stock_id)
+	match, _ = regexp.MatchString("001[0-9][0-9][0-9]", stock_id)
 	if match {
-		return "sz",nil
+		return "sz", nil
 	}
 
 	// match 002***
-	match,_ = regexp.MatchString("002[0-9][0-9][0-9]",stock_id)
+	match, _ = regexp.MatchString("002[0-9][0-9][0-9]", stock_id)
 	if match {
-		return "sz",nil
+		return "sz", nil
 	}
 
 	// match 30***
-	match,_ = regexp.MatchString("30[0-9[0-9][0-9][0-9]",stock_id)
+	match, _ = regexp.MatchString("30[0-9[0-9][0-9][0-9]", stock_id)
 	if match {
-		return "sz",nil
+		return "sz", nil
 	}
 
 	// match 688**
-	match,_ = regexp.MatchString("688[0-9][0-9][0-9]",stock_id)
+	match, _ = regexp.MatchString("688[0-9][0-9][0-9]", stock_id)
 	if match {
-		return "sh",nil
+		return "sh", nil
 	}
 
+	// match 003**
+	match, _ = regexp.MatchString("003[0-9][0-9][0-9]", stock_id)
+	if match {
+		return "sz", nil
+	}
 	return "", errors.New("stock id error")
 }
-
-
-
